@@ -23,7 +23,7 @@ class TflFeedService
       unless splited[0] =~ %r{^(\d|-\d)}
         splited[0] = splited[0] =~ %r{^-.} ? splited[0].gsub(/^-./, '-0.') : splited[0].gsub(/^./, '0.')
       end
-      arr << { lng: splited[0], lat: splited[1] }
+      arr << { lng: splited[0].to_f, lat: splited[1].to_f }
     end
 
     arr
