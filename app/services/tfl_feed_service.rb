@@ -14,19 +14,19 @@ class TflFeedService
     end
 
     doc.remove_namespaces!
-    arr = []
+    all_locations = []
     # get all disruptions coordinates
-    coords = doc.xpath('//coordinatesLL')
-    coords.each do |coordinate|
-      splited = coordinate.children[0].text.split(",")
+    coordinates = doc.xpath('//coordinatesLL')
+    coordinates.each do |coordinate|
+      arr = coordinate.children[0].text.split(",")
       # replaced whitespace in coordinated with 0
-      unless splited[0] =~ %r{^(\d|-\d)}
-        splited[0] = splited[0] =~ %r{^-.} ? splited[0].gsub(/^-./, '-0.') : splited[0].gsub(/^./, '0.')
+      unless arr[0] =~ %r{^(\d|-\d)}
+        arr[0] = arr[0] =~ %r{^-.} ? arr[0].gsub(/^-./, '-0.') : arr[0].gsub(/^./, '0.')
       end
-      arr << { lng: splited[0].to_f, lat: splited[1].to_f }
+      all_locations << { lng: arr[0].to_f, lat: arr[1].to_f }
     end
 
-    arr
+    all_locations
   end
 
   private
