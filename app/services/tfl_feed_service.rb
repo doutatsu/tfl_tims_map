@@ -19,6 +19,10 @@ class TflFeedService
     coords = doc.xpath('//coordinatesLL')
     coords.each do |coordinate|
       splited = coordinate.children[0].text.split(",")
+      # replaced whitespace in coordinated with 0
+      unless splited[0] =~ %r{^(\d|-\d)}
+        splited[0] = splited[0] =~ %r{^-.} ? splited[0].gsub(/^-./, '-0.') : splited[0].gsub(/^./, '0.')
+      end
       arr << { lng: splited[0], lat: splited[1] }
     end
 
