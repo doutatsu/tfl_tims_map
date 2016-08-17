@@ -12,10 +12,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Assets
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'nokogiri'
 
 group :development, :test do
   gem 'pry'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'rspec-rails', '~> 3.5'
 end
 
